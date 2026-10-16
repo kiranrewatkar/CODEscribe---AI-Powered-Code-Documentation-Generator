@@ -1,0 +1,90 @@
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--surface-light);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 12px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 8px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 12px;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.logoText {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  text-align: left;
+  width: 100%;
+}
+
+.item:hover {
+  background: var(--bg-light);
+  color: var(--text-body);
+}
+
+.item.active {
+  background: rgba(14,165,233,0.08);
+  color: var(--accent-cyan-dark);
+  font-weight: 600;
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  width: 20px;
+  justify-content: center;
+}
+
+.itemLabel {
+  flex: 1;
+}

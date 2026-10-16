@@ -1,0 +1,100 @@
+# ==========================================
+# CODEscribe - Git Ignore Configuration
+# ==========================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Testing and Coverage
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Model weights, checkpoints, and Hugging Face artifacts
+model/
+models/
+checkpoints/
+hf_cache/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+wandb/
+
+# Downloaded raw datasets and generated processed datasets
+data/raw/
+data/processed/
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# Frontend (Node.js / Vite)
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.local
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local logs
+*.log
+
+# Generated outputs and training artifacts
+outputs/

@@ -1,0 +1,132 @@
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exampleSelect {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-light-2);
+  color: var(--text-body);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+.exampleSelect:focus { border-color: var(--accent-cyan); }
+
+.settingsToggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.settingsToggle:hover { background: var(--bg-light); color: var(--text-body); }
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 10px 0 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 12px;
+}
+
+.settingItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-body);
+  cursor: pointer;
+}
+.settingItem input[type='range'] {
+  width: 100px;
+  cursor: pointer;
+  accent-color: var(--accent-cyan);
+}
+.settingVal {
+  min-width: 28px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-cyan-dark);
+  font-weight: 600;
+}
+
+.settingCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-body);
+  cursor: pointer;
+}
+.settingCheckbox input { accent-color: var(--accent-cyan); cursor: pointer; }
+
+.editorWrap {
+  display: flex;
+  min-height: 300px;
+  max-height: 500px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fafafa;
+  font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.lineNumbers {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 14px 10px;
+  min-width: 40px;
+  background: #f3f4f6;
+  border-right: 1px solid var(--border);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.lineNumbers span {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  min-height: 1.7em;
+  display: block;
+}
+
+.textarea {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--text-heading);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  min-width: 0;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.hint { font-style: italic; }
+.charCount { font-variant-numeric: tabular-nums; }

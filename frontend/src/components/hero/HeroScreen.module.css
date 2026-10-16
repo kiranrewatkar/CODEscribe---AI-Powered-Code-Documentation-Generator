@@ -1,0 +1,292 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 20px 24px 36px;
+}
+
+.gradientLayer {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 40%, rgba(13, 148, 136, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(14, 165, 233, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 20%, rgba(201, 168, 76, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* Header with logo, centered PillNavbar, and badge */
+.header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.02em;
+}
+
+.logoText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.headerBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-on-dark-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  min-width: 140px;
+  justify-content: flex-end;
+}
+
+.headerBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-success);
+  box-shadow: 0 0 6px var(--accent-success);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 32px auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  color: var(--accent-gold-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 6px var(--accent-gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleMain {
+  font-size: clamp(3rem, 7.5vw, 5.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-on-dark);
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 0%, #c9d6e3 50%, #8b9ab0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.titleSub {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 400;
+  color: var(--text-on-dark-muted);
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+.description {
+  max-width: 560px;
+  font-size: 0.95rem;
+  color: #7b8fa3;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-gold);
+  color: #0f1416;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 13px 32px;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+  letter-spacing: 0.01em;
+}
+
+.ctaButton:hover {
+  background: var(--accent-gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+.ctaArrow {
+  font-size: 1.2rem;
+  transition: transform var(--transition-fast);
+}
+
+.ctaButton:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+.replayButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.replayButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.replayButton:active {
+  transform: translateY(0);
+}
+
+.replayButton:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.replayIcon {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+}
+
+.metaBadges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.metaBadge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-on-dark-muted);
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.cornerDecor {
+  position: absolute;
+  right: -60px;
+  bottom: -60px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .logo, .headerBadge {
+    min-width: auto;
+    justify-content: center;
+  }
+}

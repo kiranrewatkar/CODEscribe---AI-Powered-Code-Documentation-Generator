@@ -1,0 +1,709 @@
+/* ============================================================
+   CinematicIntro CSS Module
+   Pure CSS 3D-inspired transforms, layered depth, and typography
+   ============================================================ */
+
+.container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-dark);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  user-select: none;
+  transition: opacity 800ms ease, transform 800ms ease;
+}
+
+.resolving {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+/* Background atmospheric lighting */
+.bgGlowTeal {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.bgGlowGold {
+  position: absolute;
+  bottom: 10%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+.starGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+/* Topbar */
+.topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 36px;
+}
+
+.logoBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.logoDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.logoText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #f1f5f9;
+  text-transform: uppercase;
+}
+
+.skipButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(24, 25, 27, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.skipButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.skipButton:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.skipKey {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--accent-gold-light);
+  font-family: monospace;
+}
+
+/* 3D Viewport */
+.viewport {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.sceneStage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 600ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.activeStage {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  pointer-events: auto;
+}
+
+.leavingStage {
+  opacity: 0;
+  transform: translate3d(0, -30px, -150px) scale(0.92);
+  pointer-events: none;
+}
+
+.hiddenStage {
+  opacity: 0;
+  transform: translate3d(0, 40px, -200px) scale(0.88);
+  pointer-events: none;
+}
+
+.perspectiveStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  width: 100%;
+  max-width: 680px;
+}
+
+/* ============================================================
+   Stage 1: Floating layered code panels
+   ============================================================ */
+.codeCard {
+  background: rgba(22, 28, 30, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(13, 148, 136, 0.12);
+  padding: 16px 20px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.codeCardBack {
+  position: absolute;
+  top: -40px;
+  left: 20px;
+  width: 90%;
+  opacity: 0.45;
+  transform: rotateZ(-4deg) rotateX(10deg) translateZ(-80px);
+  filter: blur(1px);
+}
+
+.codeCardFront {
+  position: relative;
+  z-index: 2;
+  transform: rotateY(-8deg) rotateX(6deg) translateZ(30px);
+  animation: floatCode 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatCode {
+  0% { transform: rotateY(-8deg) rotateX(6deg) translateZ(30px) translateY(0); }
+  100% { transform: rotateY(-5deg) rotateX(8deg) translateZ(45px) translateY(-10px); }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+
+.cardDotRed    { width: 9px; height: 9px; border-radius: 50%; background: #ef4444; }
+.cardDotYellow { width: 9px; height: 9px; border-radius: 50%; background: #f59e0b; }
+.cardDotGreen  { width: 9px; height: 9px; border-radius: 50%; background: #10b981; }
+
+.cardFilename {
+  font-size: 0.8rem;
+  font-family: monospace;
+  color: #94a3b8;
+  margin-left: 6px;
+}
+
+.cardTag {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  background: rgba(14, 165, 233, 0.12);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.codeText {
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  margin: 0;
+  white-space: pre;
+}
+
+/* Syntax colors */
+.kw      { color: #38bdf8; font-weight: 600; }
+.fn      { color: #facc15; font-weight: 600; }
+.type    { color: #34d399; }
+.num     { color: #fb923c; }
+.builtin { color: #c084fc; }
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  box-shadow: 0 0 12px var(--accent-cyan);
+  animation: scan 2.4s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ============================================================
+   Stage 2: Transformation to Markdown Card
+   ============================================================ */
+.morphCard {
+  background: rgba(22, 28, 30, 0.95);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(201, 168, 76, 0.15);
+  padding: 22px 26px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  animation: morphPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes morphPulse {
+  0% { transform: rotateY(0deg) rotateX(4deg) translateZ(30px); }
+  100% { transform: rotateY(3deg) rotateX(1deg) translateZ(45px); }
+}
+
+.cardHeaderDoc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+
+.docBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.confidenceTag {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-success);
+  background: rgba(34, 197, 94, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.docBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.docTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+.docBlockquote {
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 12px;
+  font-size: 0.88rem;
+  color: #94a3b8;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.docSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.docSubtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent-gold-light);
+}
+
+.docRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.docParam {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--accent-cyan);
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.docParamDesc {
+  color: #cbd5e1;
+}
+
+.goldGlowBorder {
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  pointer-events: none;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ============================================================
+   Stage 3: Deterministic Mermaid Flowchart Card
+   ============================================================ */
+.mermaidCard {
+  background: rgba(22, 28, 30, 0.95);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(14, 165, 233, 0.16);
+  padding: 22px 26px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transform: rotateY(-3deg) rotateX(2deg) translateZ(40px);
+}
+
+.cardHeaderMermaid {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 18px;
+}
+
+.mermaidBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.mermaidDiagramMock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.mermaidNodeStart {
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid var(--accent-cyan);
+  color: #ffffff;
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.mermaidLine {
+  width: 2px;
+  height: 16px;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+}
+
+.mermaidLineShort {
+  width: 2px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mermaidNodeCond {
+  background: rgba(201, 168, 76, 0.15);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold-light);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: monospace;
+  transform: rotate(0deg);
+}
+
+.mermaidBranches {
+  display: flex;
+  gap: 28px;
+  margin-top: 4px;
+}
+
+.mermaidBranch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.branchLabel {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.mermaidNodeAction {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--accent-success);
+  color: #86efac;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.mermaidNodeLoop {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  color: #bae6fd;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.mermaidNodeReturn {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--accent-success);
+  color: #86efac;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+.cyanGlowBorder {
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  pointer-events: none;
+}
+
+/* Stage Step Label */
+.stageLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.stepNum {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Bottom Bar & Progression Timeline
+   ============================================================ */
+.bottomBar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 36px 28px;
+}
+
+.stageIndicators {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.indicatorActive {
+  color: #ffffff;
+}
+
+.indicatorPassed {
+  color: var(--accent-gold-light);
+}
+
+.indicatorNum {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.indicatorActive .indicatorNum {
+  background: var(--accent-gold);
+  color: #0f1416;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.4);
+}
+
+.indicatorPassed .indicatorNum {
+  background: rgba(201, 168, 76, 0.2);
+  color: var(--accent-gold-light);
+  border-color: var(--accent-gold);
+}
+
+.indicatorDivider {
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progressBarTrack {
+  width: 100%;
+  max-width: 440px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-teal), var(--accent-cyan), var(--accent-gold));
+  transition: width 40ms linear;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.5);
+}
+
+/* ============================================================
+   Accessibility: prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    transition: none !important;
+  }
+  .sceneStage {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .codeCardFront,
+  .morphCard,
+  .mermaidCard,
+  .scanLine,
+  .goldGlowBorder {
+    animation: none !important;
+    transform: none !important;
+  }
+  .progressBarFill {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Responsive: Mobile / Tablet
+   ============================================================ */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 16px 20px;
+  }
+  .bottomBar {
+    padding: 12px 20px 20px;
+  }
+  .stageIndicators {
+    display: none;
+  }
+  .codeCardBack {
+    display: none;
+  }
+  .codeText {
+    font-size: 0.75rem;
+  }
+  .docTitle {
+    font-size: 1.05rem;
+  }
+  .docBlockquote {
+    font-size: 0.8rem;
+  }
+  .mermaidBranches {
+    gap: 12px;
+  }
+}

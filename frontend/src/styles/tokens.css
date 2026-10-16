@@ -1,0 +1,69 @@
+/* ============================================================
+   CODEscribe Design Tokens
+   Central CSS custom properties for consistent theming.
+   ============================================================ */
+
+:root {
+  /* --- Dark hero palette --- */
+  --bg-dark: #0f1416;
+  --surface-dark: #161c1e;
+  --surface-dark-2: #1c2428;
+
+  /* --- Pill navbar --- */
+  --nav-outer: #18191b;
+  --nav-track: #2e3136;
+  --nav-active-bg: #f0f2f5;
+  --nav-active-text: #0f1416;
+  --nav-inactive-text: #9ca3af;
+
+  /* --- Workspace palette --- */
+  --bg-light: #f4f6f9;
+  --surface-light: #ffffff;
+  --surface-light-2: #f8fafc;
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+
+  /* --- Typography --- */
+  --text-heading: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --text-on-dark: #f0f2f5;
+  --text-on-dark-muted: #8b9ab0;
+
+  /* --- Accent --- */
+  --accent-gold: #c9a84c;
+  --accent-gold-light: #e8c76a;
+  --accent-cyan: #0ea5e9;
+  --accent-cyan-dark: #0369a1;
+  --accent-teal: #0d9488;
+  --accent-success: #22c55e;
+  --accent-warning: #f59e0b;
+  --accent-error: #ef4444;
+
+  /* --- Geometry --- */
+  --radius-card: 16px;
+  --radius-card-lg: 20px;
+  --radius-pill: 9999px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+
+  /* --- Shadows --- */
+  --shadow-card: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 20px rgba(0,0,0,0.12);
+  --shadow-hero: 0 8px 40px rgba(0,0,0,0.5);
+
+  /* --- Transitions --- */
+  --transition-fast: 140ms ease;
+  --transition-base: 220ms ease;
+  --transition-slow: 380ms ease;
+
+  /* --- Sidebar --- */
+  --sidebar-width: 220px;
+  --sidebar-collapsed-width: 64px;
+
+  /* --- Z-index --- */
+  --z-navbar: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
