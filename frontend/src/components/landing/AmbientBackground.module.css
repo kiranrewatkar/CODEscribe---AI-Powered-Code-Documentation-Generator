@@ -1,0 +1,172 @@
+/* ============================================================
+   AmbientBackground Module — Living Atmosphere & Geometric Motifs
+   ============================================================ */
+
+.ambientRoot {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Atmospheric Orbs --- */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  will-change: transform, opacity;
+  opacity: 0.65;
+}
+
+.orb1 {
+  width: 550px;
+  height: 550px;
+  top: -8%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(239, 151, 147, 0.45) 0%, rgba(245, 174, 170, 0.2) 60%, transparent 75%);
+  animation: drift-orb1 24s ease-in-out infinite alternate;
+}
+
+.orb2 {
+  width: 600px;
+  height: 600px;
+  top: 15%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(241, 213, 209, 0.5) 0%, rgba(230, 141, 145, 0.25) 55%, transparent 75%);
+  animation: drift-orb2 28s ease-in-out infinite alternate;
+}
+
+.orb3 {
+  width: 500px;
+  height: 500px;
+  bottom: 5%;
+  left: 25%;
+  background: radial-gradient(circle, rgba(255, 254, 252, 0.6) 0%, rgba(241, 240, 235, 0.2) 60%, transparent 80%);
+  animation: drift-orb3 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift-orb1 {
+  0% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 14px), calc(var(--mouse-y, 0) * 10px), 0) scale(1);
+  }
+  50% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 14px + 30px), calc(var(--mouse-y, 0) * 10px - 20px), 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 14px - 20px), calc(var(--mouse-y, 0) * 10px + 25px), 0) scale(0.96);
+  }
+}
+
+@keyframes drift-orb2 {
+  0% {
+    transform: translate3d(calc(var(--mouse-x, 0) * -12px), calc(var(--mouse-y, 0) * -10px), 0) scale(1);
+  }
+  50% {
+    transform: translate3d(calc(var(--mouse-x, 0) * -12px - 25px), calc(var(--mouse-y, 0) * -10px + 30px), 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(calc(var(--mouse-x, 0) * -12px + 18px), calc(var(--mouse-y, 0) * -10px - 15px), 0) scale(0.95);
+  }
+}
+
+@keyframes drift-orb3 {
+  0% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 8px), calc(var(--mouse-y, 0) * 8px), 0) scale(1);
+  }
+  50% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 8px + 20px), calc(var(--mouse-y, 0) * 8px + 15px), 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(calc(var(--mouse-x, 0) * 8px - 15px), calc(var(--mouse-y, 0) * 8px - 20px), 0) scale(0.98);
+  }
+}
+
+/* --- Floating Geometric Motifs --- */
+.driftCluster {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1;
+}
+
+.clusterLeft {
+  top: 25%;
+  left: 6%;
+  transform: translate3d(calc(var(--mouse-x, 0) * 16px), calc(var(--mouse-y, 0) * 12px), 0);
+  transition: transform 120ms ease-out;
+}
+
+.clusterRight {
+  top: 35%;
+  right: 6%;
+  transform: translate3d(calc(var(--mouse-x, 0) * -16px), calc(var(--mouse-y, 0) * -12px), 0);
+  transition: transform 120ms ease-out;
+}
+
+.driftSq {
+  background: var(--color-white);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(35, 22, 20, 0.08);
+  animation: square-float 8s ease-in-out infinite alternate;
+}
+
+.driftSqOutline {
+  border: 1.5px solid var(--color-coral-dark);
+  border-radius: 4px;
+  background: transparent;
+  animation: square-float-alt 9.5s ease-in-out infinite alternate;
+}
+
+@keyframes square-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+@keyframes square-float-alt {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(14px) rotate(-6deg);
+  }
+}
+
+/* Subtle micro-dot grid */
+.gridAccent {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(18, 18, 16, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.7;
+}
+
+/* Section-level variant overrides */
+.section .orb1 {
+  width: 450px;
+  height: 450px;
+  opacity: 0.35;
+}
+
+.section .orb2 {
+  width: 450px;
+  height: 450px;
+  opacity: 0.35;
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .orb1, .orb2, .orb3,
+  .driftSq, .driftSqOutline {
+    animation: none !important;
+  }
+  .clusterLeft, .clusterRight {
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,233 @@
+/* ============================================================
+   ProcessSection Module — Asymmetric Process & Explanatory Cards
+   ============================================================ */
+
+.processSection {
+  background: var(--color-cream);
+  padding: 100px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-coral-dark);
+}
+
+.heading {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+
+/* Asymmetric Grid: Illustration Left, Cards Right */
+.asymmetricGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Large Process Illustration Card */
+.illustrationWrapper {
+  position: sticky;
+  top: 100px;
+}
+
+.illustrationCard {
+  background: var(--color-white);
+  border: 1px solid rgba(18, 18, 16, 0.09);
+  border-radius: var(--radius-large);
+  padding: 48px 36px;
+  box-shadow: var(--shadow-panel);
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(calc(var(--mouse-x, 0) * 8px), calc(var(--mouse-y, 0) * 6px), 0);
+  transition: transform 160ms var(--motion-ease-interaction);
+}
+
+.cardGlow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--color-coral-soft) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.flowStages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.stageBlock {
+  width: 100%;
+  max-width: 320px;
+  background: var(--color-cream);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stageBlockActive {
+  width: 100%;
+  max-width: 340px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 30px rgba(18, 18, 16, 0.2);
+}
+
+.stageIcon {
+  font-size: 1.8rem;
+  margin-bottom: 2px;
+}
+
+.stageLabel {
+  font-size: 1rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+.stageSub {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.stageBlockActive .stageSub {
+  color: var(--color-coral-soft);
+}
+
+.stageArrow {
+  color: var(--color-coral-dark);
+  display: flex;
+  justify-content: center;
+}
+
+.stageOutputs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.outMini {
+  flex: 1;
+  background: var(--color-cream);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Explanatory Cards Column */
+.cardsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.processCard {
+  background: var(--color-white);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  box-shadow: 0 4px 16px rgba(18, 18, 16, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition:
+    transform var(--motion-fast) var(--motion-ease-interaction),
+    box-shadow var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+
+.processCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(35, 22, 20, 0.08);
+  border-color: rgba(18, 18, 16, 0.2);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.cardNum {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--color-coral-dark);
+  letter-spacing: 0.05em;
+  font-family: monospace;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.cardDesc {
+  font-size: 0.92rem;
+  color: var(--color-body);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .illustrationCard, .processCard, .processCard:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .asymmetricGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .illustrationWrapper {
+    position: static;
+  }
+}

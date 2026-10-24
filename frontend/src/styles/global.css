@@ -1,5 +1,5 @@
 /* ============================================================
-   CODEscribe Global Styles
+   CODEscribe Global Styles — Warm Editorial Aesthetic
    ============================================================ */
 
 @import './tokens.css';
@@ -10,45 +10,94 @@
   padding: 0;
 }
 
-html, body, #root {
+html {
+  scroll-behavior: smooth;
   height: 100%;
   width: 100%;
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: var(--bg-light);
-  color: var(--text-body);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--color-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 9999px;
+  background: rgba(18, 18, 16, 0.2);
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-faint);
+  background: rgba(18, 18, 16, 0.35);
+}
+
+/* Editorial selection */
+::selection {
+  background: var(--color-coral-soft);
+  color: var(--color-ink);
 }
 
 /* Focus outline for accessibility */
 :focus-visible {
-  outline: 2px solid var(--accent-cyan);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-ink);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
 /* Code blocks */
 pre, code {
   font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.875rem;
+}
+
+/* --- Global Scroll Reveal Classes --- */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.99);
+  transition:
+    opacity var(--duration-reveal) var(--ease-reveal),
+    transform var(--duration-reveal) var(--ease-reveal);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-up.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

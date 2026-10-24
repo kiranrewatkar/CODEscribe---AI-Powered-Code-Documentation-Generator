@@ -1,0 +1,189 @@
+/* ============================================================
+   FaqSection Module — Editorial 2-Column Accordion Layout
+   ============================================================ */
+
+.faqSection {
+  background: var(--color-white);
+  padding: 110px 24px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(18, 18, 16, 0.08);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Left Column */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 120px;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-coral-dark);
+}
+
+.heading {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--color-body);
+  line-height: 1.6;
+}
+
+.actionBtn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 24px;
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+  margin-top: 8px;
+  transition:
+    transform var(--duration-hover) var(--ease-interaction),
+    background-color var(--duration-hover) ease,
+    box-shadow var(--duration-hover) ease;
+}
+
+.actionBtn:hover {
+  transform: translateY(-2px);
+  background: #252422;
+  box-shadow: 0 4px 14px rgba(18, 18, 16, 0.25);
+}
+
+.actionBtn:active {
+  transform: translateY(0);
+}
+
+/* Right Column Accordion */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+}
+
+.faqRow {
+  border-bottom: 1px solid rgba(18, 18, 16, 0.1);
+  transition: border-color var(--duration-hover) ease;
+}
+
+.questionBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: color var(--motion-fast) ease;
+}
+
+.questionBtn:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.questionBtn:hover .questionText {
+  color: var(--color-coral-dark);
+}
+
+.questionText {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  transition: color var(--duration-hover) ease;
+}
+
+.iconWrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(18, 18, 16, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 280ms var(--ease-reveal), background-color var(--duration-hover) ease;
+}
+
+.chevronIcon {
+  color: var(--color-ink);
+  transition: transform 280ms var(--ease-reveal);
+}
+
+.isOpen .iconWrapper {
+  background: var(--color-ink);
+}
+
+.isOpen .chevronIcon {
+  color: var(--color-white);
+  transform: rotate(180deg);
+}
+
+/* Smooth Accordion Motion via grid-template-rows */
+.answerRegion {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms var(--ease-reveal),
+    opacity 220ms ease;
+}
+
+.isOpen .answerRegion {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.answerInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.answerText {
+  font-size: 0.95rem;
+  color: var(--color-body);
+  line-height: 1.65;
+  padding: 0 4px 24px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .leftCol {
+    position: static;
+  }
+}

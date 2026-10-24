@@ -1,0 +1,84 @@
+/* ============================================================
+   TechStrip Module — Clean Off-White Technology Strip
+   ============================================================ */
+
+.techSection {
+  background: var(--color-cream);
+  padding: 40px 24px 60px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(18, 18, 16, 0.06);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.leadLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.techRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.techItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 254, 252, 0.7);
+  border: 1px solid rgba(18, 18, 16, 0.07);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  transition: transform var(--duration-hover) ease, background-color var(--duration-hover) ease;
+}
+
+.techItem:hover {
+  transform: translateY(-2px);
+  background: var(--color-white);
+  border-color: rgba(18, 18, 16, 0.14);
+}
+
+.techDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-coral-dark);
+}
+
+.techText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.techName {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.techDetail {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+}
+
+@media (max-width: 768px) {
+  .techRow {
+    gap: 16px;
+  }
+}

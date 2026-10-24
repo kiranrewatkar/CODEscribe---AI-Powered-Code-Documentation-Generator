@@ -1,0 +1,19 @@
+/* ============================================================
+   InteractiveParticles Module — Living Canvas Particle System
+   ============================================================ */
+
+.particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Crucial: Never blocks user interaction on buttons, links, or code */
+  z-index: 1;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particleCanvas {
+    display: none !important;
+  }
+}

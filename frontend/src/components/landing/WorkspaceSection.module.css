@@ -1,0 +1,244 @@
+/* ============================================================
+   WorkspaceSection Module — Integrated Workspace on Cream
+   ============================================================ */
+
+.workspaceSection {
+  background: var(--color-cream);
+  padding: 100px 24px 120px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* Header */
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-coral-dark);
+}
+
+.heading {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+}
+
+.lead {
+  font-size: 1.05rem;
+  color: var(--color-body);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+
+/* Mode Switcher Tabs */
+.modeTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(18, 18, 16, 0.06);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+}
+
+.modeTab {
+  border: none;
+  background: transparent;
+  color: var(--color-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) var(--motion-ease-interaction);
+}
+
+.modeTab:hover {
+  color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.modeTab:active {
+  transform: scale(0.98);
+}
+
+.modeTabActive {
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: 0 2px 8px rgba(18, 18, 16, 0.1);
+}
+
+.modeTabActive:hover {
+  transform: none;
+}
+
+.healthStatusGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gpuBadge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-white);
+  border: 1px solid rgba(18, 18, 16, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 4px rgba(18, 18, 16, 0.06);
+}
+
+/* 2-Column Grid Layout */
+.editorGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.editorPane, .outputPane {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.mermaidWrap {
+  margin-top: 4px;
+}
+
+/* Single Pane Views */
+.singlePane {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* About Card */
+.aboutCard {
+  background: var(--color-white);
+  border: 1px solid rgba(18, 18, 16, 0.09);
+  border-radius: var(--radius-large);
+  padding: 36px 40px;
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aboutTitle {
+  font-size: 1.35rem;
+  font-weight: 750;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.aboutText {
+  font-size: 0.98rem;
+  color: var(--color-body);
+  line-height: 1.7;
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.specItem {
+  background: var(--color-cream);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.specLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.specVal {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  font-family: monospace;
+}
+
+.runtimeBox {
+  margin-top: 12px;
+  padding: 16px 20px;
+  background: var(--surface-light-2);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+}
+
+.runtimeBox h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  margin-bottom: 8px;
+}
+
+.runtimeDetails {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--color-body);
+}
+
+@media (max-width: 960px) {
+  .editorGrid {
+    grid-template-columns: 1fr;
+  }
+  .specsGrid {
+    grid-template-columns: 1fr;
+  }
+}

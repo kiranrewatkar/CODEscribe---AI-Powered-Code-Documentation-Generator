@@ -1,0 +1,13 @@
+/* ============================================================
+   LandingPage Module — Layout Container
+   ============================================================ */
+
+.pageContainer {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-cream);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}

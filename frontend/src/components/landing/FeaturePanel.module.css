@@ -1,0 +1,231 @@
+/* ============================================================
+   FeaturePanel Module — Charcoal Story Panel on Cream
+   ============================================================ */
+
+.sectionWrapper {
+  background: var(--color-cream);
+  padding: 60px 24px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.charcoalPanel {
+  width: 100%;
+  max-width: 1240px;
+  background: var(--color-footer);
+  border-radius: var(--radius-large);
+  padding: 64px 56px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 56px;
+  box-shadow: 0 20px 50px rgba(18, 18, 16, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Text Column */
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 650;
+  color: var(--color-coral-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  align-self: flex-start;
+}
+
+.badgeSquare {
+  width: 6px;
+  height: 6px;
+  background: var(--color-coral);
+  border-radius: 1px;
+}
+
+.heading {
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--color-white);
+}
+
+.leadText {
+  font-size: 1.05rem;
+  color: #B8B5B1;
+  line-height: 1.6;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.featureList li {
+  font-size: 0.92rem;
+  color: #D1CEC7;
+  line-height: 1.55;
+  position: relative;
+  padding-left: 20px;
+}
+
+.featureList li::before {
+  content: '■';
+  position: absolute;
+  left: 0;
+  color: var(--color-coral);
+  font-size: 0.65rem;
+  top: 4px;
+}
+
+.featureList strong {
+  color: var(--color-white);
+  font-weight: 650;
+}
+
+/* Visual Column */
+.visualColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagramContainer {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nodeCard {
+  width: 100%;
+  background: #232126;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nodeHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dotRed, .dotYellow, .dotGreen {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dotRed { background: #FF5F56; }
+.dotYellow { background: #FFBD2E; }
+.dotGreen { background: #27C93F; }
+
+.nodeTitle {
+  font-size: 0.72rem;
+  color: #A8A29E;
+  margin-left: 4px;
+  font-family: monospace;
+}
+
+.nodeCode {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: #E2E8F0;
+  line-height: 1.5;
+}
+
+/* Flow connector */
+.flowConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.lineVertical {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), var(--color-coral));
+}
+
+.splitBranch {
+  display: flex;
+  gap: 12px;
+}
+
+.branchPill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-white);
+  background: rgba(230, 141, 145, 0.25);
+  border: 1px solid var(--color-coral);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Output grid */
+.outputGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+}
+
+.outCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform var(--duration-hover) ease, background-color var(--duration-hover) ease;
+}
+
+.outCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.outIcon {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.outTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.outSub {
+  font-size: 0.7rem;
+  color: #A8A29E;
+}
+
+@media (max-width: 980px) {
+  .charcoalPanel {
+    grid-template-columns: 1fr;
+    padding: 40px 28px;
+    gap: 40px;
+  }
+}

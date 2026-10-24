@@ -16,11 +16,11 @@
   white-space: pre-wrap;
   font-family: 'Fira Code', 'Cascadia Code', monospace;
   font-size: 0.8rem;
-  color: var(--text-body);
+  color: #F5F5F4;
   line-height: 1.65;
-  background: #fafafa;
-  padding: 14px;
-  border: 1px solid var(--border);
+  background: #171518;
+  padding: 16px;
+  border: 1px solid rgba(18, 18, 16, 0.12);
   border-radius: var(--radius-md);
 }
 

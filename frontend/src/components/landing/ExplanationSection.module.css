@@ -1,0 +1,142 @@
+/* ============================================================
+   ExplanationSection Module — Centered Editorial Flow
+   ============================================================ */
+
+.explanationSection {
+  background: var(--color-white);
+  padding: 100px 24px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(18, 18, 16, 0.06);
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-coral-dark);
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--color-body);
+  max-width: 640px;
+  line-height: 1.6;
+  margin-bottom: 56px;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.stepCard {
+  background: var(--color-cream);
+  border: 1px solid rgba(18, 18, 16, 0.08);
+  border-radius: var(--radius-card);
+  padding: 28px 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform var(--duration-hover) ease, box-shadow var(--duration-hover) ease;
+}
+
+.stepCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(18, 18, 16, 0.06);
+}
+
+.stepNum {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepTitle {
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.stepText {
+  font-size: 0.85rem;
+  color: var(--color-body);
+  line-height: 1.55;
+}
+
+/* Code strip */
+.codeStrip {
+  width: 100%;
+  background: #171518;
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  overflow-x: auto;
+  border: 1px solid rgba(18, 18, 16, 0.1);
+  box-shadow: 0 4px 16px rgba(18, 18, 16, 0.08);
+}
+
+.stripTrack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.stripToken {
+  color: #F5F5F4;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.stripArrow {
+  color: var(--color-coral);
+  font-weight: 700;
+}
+
+@media (max-width: 960px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
-import { HeroScreen } from './components/hero/HeroScreen';
+import { LandingPage } from './components/landing/LandingPage';
 import { WorkspaceView } from './components/workspace/WorkspaceView';
 import { CinematicIntro } from './components/intro/CinematicIntro';
 import './styles/global.css';
 
-type AppView = 'intro' | 'hero' | 'workspace';
+type AppView = 'intro' | 'landing' | 'workspace';
 type WorkspaceTab = 'editor' | 'examples' | 'about';
 
 const INTRO_STORAGE_KEY = 'codescribe_intro_seen';
@@ -26,28 +26,28 @@ function markIntroSeen(): void {
 }
 
 function App() {
-  // Only play intro on first visit; otherwise start directly on hero screen
+  // Only play intro on first visit; otherwise start directly on landing page
   const [view, setView] = useState<AppView>(() => {
-    return hasSeenIntro() ? 'hero' : 'intro';
+    return hasSeenIntro() ? 'landing' : 'intro';
   });
   const [tab, setTab] = useState<WorkspaceTab>('editor');
 
-  const handleEnterWorkspace = useCallback((initialTab: WorkspaceTab = 'editor') => {
+  const handleEnterStandaloneWorkspace = useCallback((initialTab: WorkspaceTab = 'editor') => {
     setTab(initialTab);
     setView('workspace');
   }, []);
 
   const handleIntroComplete = useCallback(() => {
     markIntroSeen();
-    setView('hero');
+    setView('landing');
   }, []);
 
   const handleReplayIntro = useCallback(() => {
     setView('intro');
   }, []);
 
-  const handleBackToHero = useCallback(() => {
-    setView('hero');
+  const handleBackToLanding = useCallback(() => {
+    setView('landing');
   }, []);
 
   return (
@@ -55,16 +55,16 @@ function App() {
       {view === 'intro' && (
         <CinematicIntro onComplete={handleIntroComplete} />
       )}
-      {view === 'hero' && (
-        <HeroScreen
-          onEnter={handleEnterWorkspace}
+      {view === 'landing' && (
+        <LandingPage
           onReplayIntro={handleReplayIntro}
+          onEnterStandalone={handleEnterStandaloneWorkspace}
         />
       )}
       {view === 'workspace' && (
         <WorkspaceView
           initialView={tab}
-          onBack={handleBackToHero}
+          onBack={handleBackToLanding}
         />
       )}
     </>

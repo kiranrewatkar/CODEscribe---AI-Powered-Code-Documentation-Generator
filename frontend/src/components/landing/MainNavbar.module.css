@@ -1,0 +1,189 @@
+/* ============================================================
+   MainNavbar Module — Spacious Header to Floating Pill Capsule
+   ============================================================ */
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-navbar);
+  padding: 24px 36px;
+  display: flex;
+  justify-content: center;
+  transition:
+    transform 360ms var(--ease-reveal),
+    opacity 320ms var(--ease-reveal),
+    padding 260ms ease;
+}
+
+.navbarInner {
+  width: 100%;
+  max-width: 1320px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition:
+    background-color 260ms ease,
+    box-shadow 260ms ease,
+    padding 260ms ease,
+    border-radius 260ms ease;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-weight: 750;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.brandMark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.03em;
+}
+
+.brandName {
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+/* Nav links */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  transition: background-color 220ms ease;
+}
+
+.navLink {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  transition:
+    color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.navLink:hover {
+  background: rgba(18, 18, 16, 0.06);
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.navLinkActive {
+  background: rgba(18, 18, 16, 0.08);
+  font-weight: 600;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.introBtn {
+  background: transparent;
+  border: 1px solid rgba(18, 18, 16, 0.18);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-hover) ease,
+    border-color var(--duration-hover) ease;
+}
+
+.introBtn:hover {
+  background: rgba(18, 18, 16, 0.06);
+  border-color: rgba(18, 18, 16, 0.35);
+}
+
+.ctaBtn {
+  background: var(--color-ink);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 9px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition:
+    transform var(--duration-hover) var(--ease-interaction),
+    background-color var(--duration-hover) ease,
+    box-shadow var(--duration-hover) ease;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(18, 18, 16, 0.25);
+}
+
+.ctaBtn:active {
+  transform: translateY(0);
+}
+
+/* --- Sticky Capsule State --- */
+.isSticky {
+  position: fixed;
+  top: 14px;
+  padding: 0 20px;
+}
+
+.isSticky .navbarInner {
+  max-width: 900px;
+  background: var(--color-white);
+  border: 1px solid rgba(18, 18, 16, 0.1);
+  border-radius: var(--radius-pill);
+  padding: 6px 8px 6px 18px;
+  box-shadow: var(--shadow-capsule);
+  backdrop-filter: blur(12px);
+}
+
+.isSticky .navLinks {
+  background: rgba(18, 18, 16, 0.04);
+}
+
+.isSticky .navLinkActive {
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow: 0 1px 4px rgba(18, 18, 16, 0.12);
+}
+
+@media (max-width: 980px) {
+  .navLinks {
+    display: none;
+  }
+  .header {
+    padding: 16px 20px;
+  }
+}

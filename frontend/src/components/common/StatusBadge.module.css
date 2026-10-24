@@ -19,35 +19,44 @@
 
 /* Variants */
 .ok {
-  background: rgba(34, 197, 94, 0.1);
-  color: #16a34a;
-  border-color: rgba(34, 197, 94, 0.2);
+  background: rgba(22, 163, 74, 0.1);
+  color: #16A34A;
+  border-color: rgba(22, 163, 74, 0.25);
 }
-.ok .dot { background: #22c55e; }
+.ok .dot {
+  background: #16A34A;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.5);
+}
 
 .degraded {
-  background: rgba(245, 158, 11, 0.1);
-  color: #b45309;
-  border-color: rgba(245, 158, 11, 0.2);
+  background: rgba(217, 119, 6, 0.1);
+  color: #D97706;
+  border-color: rgba(217, 119, 6, 0.25);
 }
-.degraded .dot { background: #f59e0b; }
+.degraded .dot {
+  background: #D97706;
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.5);
+}
 
 .loading {
-  background: rgba(148, 163, 184, 0.1);
-  color: var(--text-muted);
-  border-color: var(--border);
+  background: rgba(18, 18, 16, 0.05);
+  color: var(--color-muted);
+  border-color: rgba(18, 18, 16, 0.12);
 }
 .loading .dot {
-  background: var(--text-faint);
+  background: var(--color-muted);
   animation: blink 1.2s ease-in-out infinite;
 }
 
 .error {
-  background: rgba(239, 68, 68, 0.1);
-  color: #b91c1c;
-  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(220, 38, 38, 0.1);
+  color: #DC2626;
+  border-color: rgba(220, 38, 38, 0.25);
 }
-.error .dot { background: #ef4444; }
+.error .dot {
+  background: #DC2626;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.5);
+}
 
 @keyframes blink {
   0%, 100% { opacity: 1; }

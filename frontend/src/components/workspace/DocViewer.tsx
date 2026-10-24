@@ -15,6 +15,7 @@ interface DocViewerProps {
 
 export function DocViewer({ result, loading, error, onClearError }: DocViewerProps) {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
   const [activeTab, setActiveTab] = useState<'rendered' | 'raw'>('rendered');
 
   const handleCopy = useCallback(async () => {
@@ -22,9 +23,11 @@ export function DocViewer({ result, loading, error, onClearError }: DocViewerPro
     try {
       await navigator.clipboard.writeText(result.markdown);
       setCopied(true);
+      setCopyError(false);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard not available */
+      setCopyError(true);
+      setTimeout(() => setCopyError(false), 2500);
     }
   }, [result?.markdown]);
 
@@ -44,8 +47,12 @@ export function DocViewer({ result, loading, error, onClearError }: DocViewerPro
           Markdown
         </button>
       </div>
-      <PillButton size="sm" variant="secondary" onClick={handleCopy}>
-        {copied ? '✓ Copied' : '⎘ Copy'}
+      <PillButton
+        size="sm"
+        variant={copied ? 'primary' : copyError ? 'danger' : 'secondary'}
+        onClick={handleCopy}
+      >
+        {copied ? '✓ Copied' : copyError ? '✕ Failed' : '⎘ Copy'}
       </PillButton>
     </div>
   ) : undefined;

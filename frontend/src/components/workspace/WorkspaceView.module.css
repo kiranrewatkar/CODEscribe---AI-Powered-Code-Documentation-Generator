@@ -18,8 +18,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 24px;
-  background: var(--surface-light);
+  padding: 10px 24px;
+  background: var(--surface-dark);
   border-bottom: 1px solid var(--border-subtle);
   flex-shrink: 0;
   gap: 16px;
@@ -52,23 +52,26 @@
   font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-pill);
-  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 .backBtn:hover {
-  background: var(--bg-light);
-  color: var(--text-heading);
-  border-color: var(--text-faint);
+  background: var(--surface-light-2);
+  color: var(--accent-blue-bright);
+  border-color: rgba(61, 142, 255, 0.35);
+  transform: translateX(-1px);
 }
 
 .gpuBadge {
   font-size: 0.75rem;
-  color: var(--text-faint);
-  background: var(--bg-light);
-  border: 1px solid var(--border);
-  padding: 3px 10px;
+  font-weight: 500;
+  color: var(--accent-blue-bright);
+  background: rgba(61, 142, 255, 0.08);
+  border: 1px solid rgba(61, 142, 255, 0.2);
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
+  letter-spacing: 0.02em;
 }
 
 /* Content area */
@@ -154,12 +157,12 @@
 }
 
 .aboutCard code {
-  background: var(--bg-light);
+  background: var(--surface-dark);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 1px 5px;
+  padding: 2px 6px;
   font-size: 0.82rem;
-  color: var(--accent-cyan-dark);
+  color: var(--accent-blue-bright);
 }
 
 .healthDetails {

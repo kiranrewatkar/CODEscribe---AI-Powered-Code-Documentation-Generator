@@ -54,7 +54,7 @@
 
 .errorText {
   font-size: 0.875rem;
-  color: #b91c1c;
+  color: var(--accent-error);
   max-width: 400px;
   line-height: 1.6;
 }
@@ -67,28 +67,35 @@
 
 .tabs {
   display: flex;
-  background: var(--bg-light);
+  background: rgba(18, 18, 16, 0.06);
+  border: 1px solid rgba(18, 18, 16, 0.08);
   border-radius: var(--radius-pill);
-  padding: 2px;
-  gap: 2px;
+  padding: 3px;
+  gap: 3px;
 }
 
 .tab {
   background: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  padding: 4px 12px;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 550;
+  color: var(--color-body);
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--color-ink);
 }
 
 .tab.tabActive {
-  background: var(--surface-light);
-  color: var(--text-heading);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  background: var(--color-ink);
+  color: var(--color-white);
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(18, 18, 16, 0.15);
 }
 
 .resultWrap {
@@ -99,65 +106,68 @@
 
 /* --- Markdown rendered styles --- */
 .markdown {
-  padding: 20px 24px;
+  padding: 24px 28px;
   flex: 1;
   overflow-y: auto;
-  color: var(--text-body);
+  color: var(--color-body);
   line-height: 1.7;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
-.markdown h1 { font-size: 1.4rem; color: var(--text-heading); margin: 0 0 12px; font-weight: 700; }
-.markdown h2 { font-size: 1.1rem; color: var(--text-heading); margin: 20px 0 8px; font-weight: 600; }
-.markdown h3 { font-size: 0.95rem; color: var(--text-heading); margin: 16px 0 6px; font-weight: 600; }
-.markdown p  { margin: 0 0 10px; }
-.markdown ul, .markdown ol { margin: 0 0 10px; padding-left: 20px; }
+.markdown h1 { font-size: 1.4rem; color: var(--color-ink); margin: 0 0 12px; font-weight: 750; }
+.markdown h2 { font-size: 1.15rem; color: var(--color-ink); margin: 20px 0 8px; font-weight: 700; }
+.markdown h3 { font-size: 0.98rem; color: var(--color-ink); margin: 16px 0 6px; font-weight: 700; }
+.markdown p  { margin: 0 0 12px; }
+.markdown ul, .markdown ol { margin: 0 0 12px; padding-left: 20px; }
 .markdown li { margin-bottom: 4px; }
 .markdown code {
-  background: var(--bg-light);
-  border: 1px solid var(--border);
+  background: var(--color-cream);
+  border: 1px solid rgba(18, 18, 16, 0.1);
   border-radius: 4px;
-  padding: 1px 5px;
+  padding: 2px 6px;
   font-size: 0.82rem;
-  color: var(--accent-cyan-dark);
+  color: var(--color-ink);
 }
 .markdown pre {
-  background: var(--surface-dark);
+  background: #171518;
+  border: 1px solid rgba(18, 18, 16, 0.12);
   border-radius: var(--radius-md);
-  padding: 14px 16px;
+  padding: 16px 18px;
   overflow-x: auto;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
 }
 .markdown pre code {
   background: none;
   border: none;
   padding: 0;
-  color: #e2e8f0;
+  color: #F5F5F4;
   font-size: 0.82rem;
 }
-.markdown strong { color: var(--text-heading); }
+.markdown strong { color: var(--color-ink); }
 .markdown blockquote {
-  border-left: 3px solid var(--accent-cyan);
-  padding-left: 14px;
-  color: var(--text-muted);
-  margin: 0 0 10px;
+  border-left: 3px solid var(--color-coral);
+  background: rgba(230, 141, 145, 0.1);
+  padding: 10px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--color-ink);
+  margin: 0 0 14px;
 }
-.markdown table { border-collapse: collapse; width: 100%; margin: 0 0 10px; font-size: 0.85rem; }
-.markdown th { background: var(--bg-light); padding: 6px 12px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
-.markdown td { padding: 6px 12px; border: 1px solid var(--border); }
+.markdown table { border-collapse: collapse; width: 100%; margin: 0 0 14px; font-size: 0.85rem; }
+.markdown th { background: var(--color-cream); padding: 8px 12px; text-align: left; border: 1px solid rgba(18, 18, 16, 0.1); font-weight: 700; color: var(--color-ink); }
+.markdown td { padding: 8px 12px; border: 1px solid rgba(18, 18, 16, 0.08); }
 
 /* --- Raw markdown --- */
 .rawMarkdown {
   flex: 1;
-  padding: 20px 24px;
+  padding: 24px 28px;
   overflow: auto;
   white-space: pre-wrap;
   font-family: 'Fira Code', 'Cascadia Code', monospace;
   font-size: 0.82rem;
-  color: var(--text-body);
+  color: #F5F5F4;
   line-height: 1.7;
-  background: #fafafa;
-  border-top: 1px solid var(--border-subtle);
+  background: #171518;
+  border-top: 1px solid rgba(18, 18, 16, 0.08);
 }
 
 /* --- Timing bar --- */
