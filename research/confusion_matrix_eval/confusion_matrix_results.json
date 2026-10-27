@@ -1,0 +1,172 @@
+{
+  "evaluation_target": "app/audit.py \u2014 parameter mention detection (heuristic lexical)",
+  "positive_definition": "Parameter IS genuinely documented in the Markdown Parameters section (GT=True, Audit=MENTIONED \u2192 TP)",
+  "negative_definition": "Parameter IS NOT in the Markdown Parameters section (GT=False, Audit=NOT_MENTIONED \u2192 TN)",
+  "labeled_param_instances": 17,
+  "matrix": {
+    "TP": 8,
+    "TN": 9,
+    "FP": 0,
+    "FN": 0
+  },
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "accuracy": 1.0,
+  "per_param_records": [
+    {
+      "case_id": "A",
+      "case_name": "Fully documented \u2014 both params clearly in Parameters section",
+      "param": "x",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "A",
+      "case_name": "Fully documented \u2014 both params clearly in Parameters section",
+      "param": "y",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "B",
+      "case_name": "Partially documented \u2014 first param present, second omitted",
+      "param": "numerator",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "B",
+      "case_name": "Partially documented \u2014 first param present, second omitted",
+      "param": "denominator",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "C",
+      "case_name": "No Parameters section at all \u2014 all params undocumented",
+      "param": "host",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "C",
+      "case_name": "No Parameters section at all \u2014 all params undocumented",
+      "param": "port",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "C",
+      "case_name": "No Parameters section at all \u2014 all params undocumented",
+      "param": "timeout",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "D",
+      "case_name": "Param only in code block \u2014 not in Parameters section (should not count)",
+      "param": "data",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "D",
+      "case_name": "Param only in code block \u2014 not in Parameters section (should not count)",
+      "param": "scale",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "E",
+      "case_name": "Param name in prose only \u2014 not a Parameters section entry",
+      "param": "data",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "E",
+      "case_name": "Param name in prose only \u2014 not a Parameters section entry",
+      "param": "mode",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "F",
+      "case_name": "Async function \u2014 all params documented",
+      "param": "url",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "F",
+      "case_name": "Async function \u2014 all params documented",
+      "param": "retries",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "F",
+      "case_name": "Async function \u2014 all params documented",
+      "param": "timeout",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "G",
+      "case_name": "Three params, only first documented in Parameters section",
+      "param": "data",
+      "gt_documented": true,
+      "audit_status": "MENTIONED",
+      "predicted_mentioned": true,
+      "cell": "TP"
+    },
+    {
+      "case_id": "G",
+      "case_name": "Three params, only first documented in Parameters section",
+      "param": "level",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    },
+    {
+      "case_id": "G",
+      "case_name": "Three params, only first documented in Parameters section",
+      "param": "method",
+      "gt_documented": false,
+      "audit_status": "NOT_MENTIONED",
+      "predicted_mentioned": false,
+      "cell": "TN"
+    }
+  ],
+  "disclaimer": "This evaluation assesses ONLY the audit engine's heuristic parameter-mention detection accuracy. It does NOT measure CodeT5 generation quality, ROUGE/BLEU, or semantic documentation correctness."
+}

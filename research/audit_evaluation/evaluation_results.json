@@ -1,0 +1,1282 @@
+{
+  "summary": {
+    "total_cases": 20,
+    "passed_cases": 20,
+    "failed_cases": 0,
+    "ambiguous_cases": 0,
+    "pass_rate_percentage": 100.0
+  },
+  "case_results": [
+    {
+      "case_id": 1,
+      "name": "Fully documented binary search",
+      "category": "parameter_and_return",
+      "description": "All parameters, return annotation, and signature match documentation.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "binary_search",
+          "status": "MENTIONED",
+          "message": "Function 'binary_search' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "arr",
+          "status": "MENTIONED",
+          "message": "Parameter 'arr' is mentioned within the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "target",
+          "status": "MENTIONED",
+          "message": "Parameter 'target' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "binary_search",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "arr",
+          "target"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 2,
+      "name": "Partially documented function (omitted parameters)",
+      "category": "parameter",
+      "description": "Parameters tax_rate and discount are omitted from Parameters section.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.33,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.33,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "calculate_total",
+          "status": "MENTIONED",
+          "message": "Function 'calculate_total' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "subtotal",
+          "status": "MENTIONED",
+          "message": "Parameter 'subtotal' is mentioned within the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "tax_rate",
+          "status": "NOT_MENTIONED",
+          "message": "Parameter 'tax_rate' is missing from the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "discount",
+          "status": "NOT_MENTIONED",
+          "message": "Parameter 'discount' is missing from the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "float",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "calculate_total",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "subtotal",
+          "tax_rate",
+          "discount"
+        ],
+        "return_annotation": "float",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 3,
+      "name": "Parameter in signature code block but missing Parameters section",
+      "category": "parameter",
+      "description": "Presence in code block does not count as documented in Parameters section.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "process_data",
+          "status": "MENTIONED",
+          "message": "Function 'process_data' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "payload",
+          "status": "NOT_MENTIONED",
+          "message": "Parameter 'payload' is present in source AST but is not documented (no 'Parameters' section found; mentions in code blocks do not count as parameter documentation)."
+        },
+        {
+          "category": "return",
+          "subject": "bool",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "process_data",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "payload"
+        ],
+        "return_annotation": "bool",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 4,
+      "name": "Parameter mentioned in ordinary prose of another item",
+      "category": "parameter",
+      "description": "English article ' a ' in target's prose must not count as defining parameter 'a'.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.5,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 0.5,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "process",
+          "status": "MENTIONED",
+          "message": "Function 'process' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "a",
+          "status": "NOT_MENTIONED",
+          "message": "Parameter 'a' is missing from the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "target",
+          "status": "MENTIONED",
+          "message": "Parameter 'target' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "process",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "a",
+          "target"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 5,
+      "name": "Void function omitting Returns section",
+      "category": "return",
+      "description": "Void function has no return value; Returns section appropriately omitted.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "reset_counter",
+          "status": "MENTIONED",
+          "message": "Function 'reset_counter' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "Function takes no parameters; no parameter documentation required."
+        },
+        {
+          "category": "return",
+          "subject": "void",
+          "status": "NOT_APPLICABLE",
+          "message": "Function produces no return value; Returns section appropriately omitted."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "reset_counter",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [],
+        "return_annotation": null,
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 6,
+      "name": "Void function documenting None in Returns section",
+      "category": "return",
+      "description": "Explicit documentation of None is recognized as NOT_APPLICABLE without discrepancy.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "close_socket",
+          "status": "MENTIONED",
+          "message": "Function 'close_socket' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "sock",
+          "status": "MENTIONED",
+          "message": "Parameter 'sock' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "void",
+          "status": "NOT_APPLICABLE",
+          "message": "Function produces no return value; Returns section appropriately documents None / no return value."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "close_socket",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "sock"
+        ],
+        "return_annotation": "None",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 7,
+      "name": "Void function with unexpected Returns section claiming return value",
+      "category": "return",
+      "description": "Documentation claims an int return value for a function that returns nothing.",
+      "expected": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "POSSIBLE_DISCREPANCY",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "POSSIBLE_DISCREPANCY",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "log_message",
+          "status": "MENTIONED",
+          "message": "Function 'log_message' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "msg",
+          "status": "MENTIONED",
+          "message": "Parameter 'msg' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "void",
+          "status": "POSSIBLE_DISCREPANCY",
+          "message": "Documentation contains a Returns section claiming a return value, but the source function has no non-None return statement."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "log_message",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "msg"
+        ],
+        "return_annotation": null,
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 8,
+      "name": "Single return statement with return annotation",
+      "category": "return",
+      "description": "Standard single-return function matches documentation.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "square",
+          "status": "MENTIONED",
+          "message": "Function 'square' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "x",
+          "status": "MENTIONED",
+          "message": "Parameter 'x' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "float",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "square",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "x"
+        ],
+        "return_annotation": "float",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 9,
+      "name": "Multiple return branches consistently documented",
+      "category": "return",
+      "description": "Multiple return branches all return values and match Returns section.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "sign",
+          "status": "MENTIONED",
+          "message": "Function 'sign' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "x",
+          "status": "MENTIONED",
+          "message": "Parameter 'x' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "sign",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "x"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 10,
+      "name": "Multiple return statements with missing Returns section",
+      "category": "return",
+      "description": "Source returns strings, but documentation omits Returns section.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "NOT_MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "NOT_MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "classify",
+          "status": "MENTIONED",
+          "message": "Function 'classify' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "val",
+          "status": "MENTIONED",
+          "message": "Parameter 'val' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "str",
+          "status": "NOT_MENTIONED",
+          "message": "Function returns a computed value, but no Returns section is present in documentation."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "classify",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "val"
+        ],
+        "return_annotation": "str",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 11,
+      "name": "Explicit exception documented in Raises section",
+      "category": "exception",
+      "description": "Explicit ValueError raised in source is documented in Raises section.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "MENTIONED"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "MENTIONED"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "safe_divide",
+          "status": "MENTIONED",
+          "message": "Function 'safe_divide' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "a",
+          "status": "MENTIONED",
+          "message": "Parameter 'a' is mentioned within the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "b",
+          "status": "MENTIONED",
+          "message": "Parameter 'b' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "float",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "ValueError",
+          "status": "MENTIONED",
+          "message": "Explicitly raised exception 'ValueError' is acknowledged in documentation."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "safe_divide",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "a",
+          "b"
+        ],
+        "return_annotation": "float",
+        "raised_exceptions": [
+          "ValueError"
+        ]
+      }
+    },
+    {
+      "case_id": 12,
+      "name": "Explicit exception omitted from documentation",
+      "category": "exception",
+      "description": "Explicit raise ValueError in source is omitted from documentation.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_MENTIONED"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_MENTIONED"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "parse_positive",
+          "status": "MENTIONED",
+          "message": "Function 'parse_positive' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "text",
+          "status": "MENTIONED",
+          "message": "Parameter 'text' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "ValueError",
+          "status": "NOT_MENTIONED",
+          "message": "Explicitly raised exception 'ValueError' is not mentioned in documentation."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "parse_positive",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "text"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": [
+          "ValueError"
+        ]
+      }
+    },
+    {
+      "case_id": 13,
+      "name": "Bare raise with exception handling documented",
+      "category": "exception",
+      "description": "Bare raise is recognized and acknowledged in documentation text.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "MENTIONED"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "MENTIONED"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "execute_task",
+          "status": "MENTIONED",
+          "message": "Function 'execute_task' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "Function takes no parameters; no parameter documentation required."
+        },
+        {
+          "category": "return",
+          "subject": "void",
+          "status": "NOT_APPLICABLE",
+          "message": "Function produces no return value; Returns section appropriately omitted."
+        },
+        {
+          "category": "exception",
+          "subject": "<re-raise>",
+          "status": "MENTIONED",
+          "message": "Function contains bare 'raise' statement; documentation acknowledges exception handling."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "execute_task",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [],
+        "return_annotation": null,
+        "raised_exceptions": [
+          "<re-raise>"
+        ]
+      }
+    },
+    {
+      "case_id": 14,
+      "name": "Bare raise with exception documentation omitted",
+      "category": "exception",
+      "description": "Bare raise is omitted from documentation, resulting in NOT_MENTIONED.",
+      "expected": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_MENTIONED"
+      },
+      "actual": {
+        "overall_status": "INCOMPLETE",
+        "parameters_coverage_ratio": null,
+        "return_status": "NOT_APPLICABLE",
+        "exceptions_status": "NOT_MENTIONED"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "retry_task",
+          "status": "MENTIONED",
+          "message": "Function 'retry_task' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "Function takes no parameters; no parameter documentation required."
+        },
+        {
+          "category": "return",
+          "subject": "void",
+          "status": "NOT_APPLICABLE",
+          "message": "Function produces no return value; Returns section appropriately omitted."
+        },
+        {
+          "category": "exception",
+          "subject": "<re-raise>",
+          "status": "NOT_MENTIONED",
+          "message": "Function contains bare 'raise' statement, but documentation does not acknowledge exception propagation."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "retry_task",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [],
+        "return_annotation": null,
+        "raised_exceptions": [
+          "<re-raise>"
+        ]
+      }
+    },
+    {
+      "case_id": 15,
+      "name": "No exceptions raised with explicit 'No exceptions' in documentation",
+      "category": "exception",
+      "description": "Explicit declaration of no exceptions is accepted without discrepancy.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "add_two",
+          "status": "MENTIONED",
+          "message": "Function 'add_two' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "x",
+          "status": "MENTIONED",
+          "message": "Parameter 'x' is mentioned within the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "y",
+          "status": "MENTIONED",
+          "message": "Parameter 'y' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation explicitly indicates no exceptions are raised."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "add_two",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "x",
+          "y"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 16,
+      "name": "No exceptions in source but documentation claims exceptions",
+      "category": "exception",
+      "description": "Documentation documents an exception that is never explicitly raised in AST.",
+      "expected": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "POSSIBLE_DISCREPANCY"
+      },
+      "actual": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "POSSIBLE_DISCREPANCY"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "multiply",
+          "status": "MENTIONED",
+          "message": "Function 'multiply' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "a",
+          "status": "MENTIONED",
+          "message": "Parameter 'a' is mentioned within the Parameters section."
+        },
+        {
+          "category": "parameter",
+          "subject": "b",
+          "status": "MENTIONED",
+          "message": "Parameter 'b' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "POSSIBLE_DISCREPANCY",
+          "message": "Documentation contains a 'Raises' section, but no explicit 'raise' statement was found in the AST of this function (note: called functions or dynamic code might still raise errors)."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "multiply",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "a",
+          "b"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 17,
+      "name": "Generator function with yield documented",
+      "category": "generator",
+      "description": "Generator function yield semantics acknowledged in documentation.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "count_up",
+          "status": "MENTIONED",
+          "message": "Function 'count_up' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "n",
+          "status": "MENTIONED",
+          "message": "Parameter 'n' is mentioned within the Parameters section."
+        },
+        {
+          "category": "generator",
+          "subject": "yield",
+          "status": "MENTIONED",
+          "message": "Function operates as a generator; documentation acknowledges generator/yield semantics."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "count_up",
+        "is_async": false,
+        "is_generator": true,
+        "parameters": [
+          "n"
+        ],
+        "return_annotation": null,
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 18,
+      "name": "Generator function omitting yield/stream semantics",
+      "category": "generator",
+      "description": "Documentation claims single return value for a generator function.",
+      "expected": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "POSSIBLE_DISCREPANCY",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "DISCREPANCY_DETECTED",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "POSSIBLE_DISCREPANCY",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "generate_ids",
+          "status": "MENTIONED",
+          "message": "Function 'generate_ids' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "count",
+          "status": "MENTIONED",
+          "message": "Parameter 'count' is mentioned within the Parameters section."
+        },
+        {
+          "category": "generator",
+          "subject": "yield",
+          "status": "POSSIBLE_DISCREPANCY",
+          "message": "Function contains yield statements (is a generator), but documentation does not clearly mention generator/yield semantics."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "generate_ids",
+        "is_async": false,
+        "is_generator": true,
+        "parameters": [
+          "count"
+        ],
+        "return_annotation": null,
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 19,
+      "name": "Nested function scoping isolation",
+      "category": "scoping",
+      "description": "Inner function's parameter y and ValueError do not bleed into outer function.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "outer",
+          "status": "MENTIONED",
+          "message": "Function 'outer' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "x",
+          "status": "MENTIONED",
+          "message": "Parameter 'x' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "int",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "outer",
+        "is_async": false,
+        "is_generator": false,
+        "parameters": [
+          "x"
+        ],
+        "return_annotation": "int",
+        "raised_exceptions": []
+      }
+    },
+    {
+      "case_id": 20,
+      "name": "Async function with decorator and multi-line preamble",
+      "category": "async_and_preamble",
+      "description": "Header appears after 18 lines; decorated async signature in code block matches.",
+      "expected": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "actual": {
+        "overall_status": "CONSISTENT",
+        "parameters_coverage_ratio": 1.0,
+        "return_status": "MENTIONED",
+        "exceptions_status": "NOT_APPLICABLE"
+      },
+      "verdict": "PASS",
+      "matches": {
+        "overall_status": true,
+        "parameter_coverage": true,
+        "return_status": true,
+        "exceptions_status": true
+      },
+      "key_findings": [
+        {
+          "category": "signature",
+          "subject": "fetch_user",
+          "status": "MENTIONED",
+          "message": "Function 'fetch_user' is clearly identified in the documentation header/signature."
+        },
+        {
+          "category": "parameter",
+          "subject": "user_id",
+          "status": "MENTIONED",
+          "message": "Parameter 'user_id' is mentioned within the Parameters section."
+        },
+        {
+          "category": "return",
+          "subject": "dict",
+          "status": "MENTIONED",
+          "message": "Return value is documented in a dedicated Returns section."
+        },
+        {
+          "category": "exception",
+          "subject": "<none>",
+          "status": "NOT_APPLICABLE",
+          "message": "No explicit raise statements found in AST; documentation appropriately omits Raises section."
+        }
+      ],
+      "source_evidence": {
+        "function_name": "fetch_user",
+        "is_async": true,
+        "is_generator": false,
+        "parameters": [
+          "user_id"
+        ],
+        "return_annotation": "dict",
+        "raised_exceptions": []
+      }
+    }
+  ]
+}
