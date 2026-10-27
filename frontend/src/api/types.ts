@@ -65,3 +65,25 @@ export interface ApiError {
   detail: string;
   status: number;
 }
+
+export interface OptimizationFinding {
+  rule_id: string;
+  title: string;
+  description: string;
+  suggestion: string;
+  line_number: number;
+  column_offset: number;
+  function_scope: string | null;
+}
+
+export interface OptimizeRequest {
+  code: string;
+}
+
+export interface OptimizeResponse {
+  success: boolean;
+  findings: OptimizationFinding[];
+  error_message: string | null;
+  disclaimer: string;
+  total_findings: number;
+}

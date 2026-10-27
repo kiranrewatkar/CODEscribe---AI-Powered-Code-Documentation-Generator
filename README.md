@@ -21,6 +21,8 @@ Unlike cloud-dependent documentation tools that transmit proprietary code over t
 - **Automated Markdown API Documentation:** Produces structured Markdown documents complete with function signatures, extracted typed parameter tables, return annotations, and natural-language summaries.
 - **Natural-Language Docstring Assistance:** Generates concise, context-aware docstring summaries explaining what the function accomplishes and boundary considerations.
 - **Deterministic AST Control Flowcharts:** Synthesizes accurate Mermaid flowchart diagrams (`graph TD`) directly from Python control flow constructs (`if/elif/else`, `for`, `while`, `return`). Control flow logic is deterministically extracted from the AST rather than predicted by the LLM.
+- **Evidence-Grounded Documentation Audit (Standalone):** Heuristic static analysis engine (`app/audit.py`) that extracts standard-library AST structural facts (parameters, annotations, returns, explicit raises, generators) and cross-references them against Markdown sections to detect omissions or discrepancies without executing user code.
+- **Static Code Optimization Suggester (Standalone):** Lightweight AST inspection module (`app/optimization.py`) detecting practical, low-false-positive optimization patterns (mutable defaults, sequence membership checks, redundant list comprehensions in reductions, in-loop string accumulation candidates).
 - **Leakage-Safe Preprocessing Engine:** Cleans input code via an AST-based docstring stripper prior to generation, ensuring the model reasons over raw program logic rather than repeating existing comments.
 - **Local FastAPI Inference API:** Low-latency, privacy-first local backend with automated request validation, timing metrics, and hardware introspection (`GET /api/health`, `GET /api/examples`, `POST /api/document`).
 - **Modern React & TypeScript Workspace:**
@@ -117,7 +119,9 @@ CODEscribe/
 ├── app/                            # Local Inference API & Backend Services
 │   ├── __init__.py                 # Package marker
 │   ├── ast_mermaid.py              # Deterministic Python AST-to-Mermaid flowchart generator
+│   ├── audit.py                    # Evidence-grounded documentation audit engine (standalone)
 │   ├── generator.py                # Model inference manager & Markdown document assembler
+│   ├── optimization.py             # Heuristic static code optimization analyzer (standalone)
 │   └── server.py                   # FastAPI REST API with CORS and lifecycle management
 │
 ├── frontend/                       # React 19 + TypeScript + Vite UI
@@ -151,21 +155,27 @@ CODEscribe/
 │   ├── train.py                    # Fine-tuning engine with dry-run and training modes
 │   └── evaluate_model.py           # Evaluation pipeline for held-out test set
 │
+├── research/                       # Standalone Research Evaluation Artifacts
+│   ├── audit_evaluation/           # 20-case workbook evaluation runner, results JSON & README
+│   └── confusion_matrix_eval/      # Parameter-mention confusion matrix runner, results & PNG
+│
 ├── outputs/                        # Verified Evaluation & Preprocessing Reports
 │   ├── evaluation_full_training/   # Full model test_evaluation.json & predictions.csv
 │   ├── evaluation_pilot_accelerate16/ # Pilot evaluation baseline
 │   ├── training/                   # Training metrics and dry-run metadata
 │   └── training_data_audit.json    # Leakage verification audit report
 │
-├── tests/                          # 76-Test Automated Test Suite
+├── tests/                          # 138-Test Automated Test Suite
 │   ├── test_inspect_dataset.py     # Tests for raw dataset auditing (14 tests)
 │   ├── test_prepare_dataset.py     # Tests for preprocessing & grouped splits (17 tests)
-│   ├── test_remove_docstrings.py   # Tests for AST docstring stripping (13 tests)
-│   ├── test_training_config.py     # Tests for training configuration (1 test)
+│   ├── test_remove_docstrings.py   # Tests for AST docstring stripping (10 tests)
+│   ├── test_training_config.py     # Tests for training configuration (3 tests)
 │   ├── test_data_pipeline.py       # Tests for batch formatting & collation (3 tests)
 │   ├── test_evaluate_model.py      # Tests for evaluation metric computations (7 tests)
 │   ├── test_ast_mermaid.py         # Tests for deterministic Mermaid AST generation (11 tests)
-│   └── test_api.py                 # Tests for FastAPI local inference endpoints (11 tests)
+│   ├── test_api.py                 # Tests for FastAPI local inference endpoints (11 tests)
+│   ├── test_audit.py               # Tests for documentation audit engine (24 tests)
+│   └── test_optimization.py        # Tests for static code optimization suggester (38 tests)
 │
 └── docs/                           # Technical Specifications & Audits
     ├── architecture.md             # System architecture & frozen engineering baseline
@@ -322,9 +332,9 @@ Preprocesses Python source code, performs CodeT5 sequence-to-sequence docstring 
 
 ## 12. Verification & Testing
 
-CODEscribe includes an extensive, automated test suite covering dataset auditing, preprocessing, AST docstring stripping, training safety, evaluation pipelines, Mermaid generation, and FastAPI endpoints.
+CODEscribe includes an extensive, automated test suite covering dataset auditing, preprocessing, AST docstring stripping, training configuration safety, evaluation metric computation, deterministic Mermaid flowchart generation, FastAPI REST contracts, the evidence-grounded documentation audit engine, and static code optimization suggestions.
 
-### Run Python Test Suite (76 Unit Tests)
+### Run Python Test Suite (138 Automated Tests)
 
 From the project root:
 
@@ -332,15 +342,36 @@ From the project root:
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-**Test Coverage Summary:**
+**Test Coverage Summary (138 Total Tests):**
 - `tests/test_inspect_dataset.py`: 14 tests (file discovery, schema verification, AST checking)
 - `tests/test_prepare_dataset.py`: 17 tests (cleaning, deduplication, knapsack group splitting)
-- `tests/test_remove_docstrings.py`: 13 tests (AST docstring stripping, indentation preservation, leak detection)
-- `tests/test_training_config.py`: 1 test (training configuration validation)
+- `tests/test_remove_docstrings.py`: 10 tests (AST docstring stripping, indentation preservation, leak detection)
+- `tests/test_training_config.py`: 3 tests (training hyperparameters, serialization, hardware detection)
 - `tests/test_data_pipeline.py`: 3 tests (tokenization and PyTorch batch collator)
 - `tests/test_evaluate_model.py`: 7 tests (ROUGE-1/2/L, BLEU, rejection logging)
 - `tests/test_ast_mermaid.py`: 11 tests (control flow parsing, branch handling, node sanitization)
 - `tests/test_api.py`: 11 tests (FastAPI endpoints, payload validation, mock and real generator contracts)
+- `tests/test_audit.py`: 24 tests (AST fact extraction, lexical Markdown cross-referencing, false-positive protection)
+- `tests/test_optimization.py`: 38 tests (heuristic optimization rules OPT001–OPT004, async defs, scoping isolation)
+
+### Standalone Research Evaluations (`research/`)
+
+In addition to automated unit and regression tests, the repository preserves two reproducible standalone research evaluations:
+
+1. **20-Case Workbook Evaluation (`research/audit_evaluation/`):**
+   - Evaluates the documentation audit engine against 20 structured workbook cases spanning parameter omission, signature code-block isolation, prose false-positive protection, void return handling, multiple returns, explicit and bare raises, generator yields, and nested scope boundaries.
+   - Run reproduction: `$env:PYTHONPATH = "D:\MCA\CODEscribe"; python research/audit_evaluation/evaluation_workbook_runner.py`
+   - Results recorded in `evaluation_results.json` (20/20 passed across all 4 evaluation dimensions).
+2. **Parameter Mention Confusion Matrix (`research/confusion_matrix_eval/`):**
+   - Independent binary classification evaluation measuring whether the audit engine correctly identifies if source-code parameters are mentioned in the Markdown Parameters section across 17 ground-truth labeled parameter instances.
+   - Run reproduction: `$env:PYTHONPATH = "D:\MCA\CODEscribe"; python research/confusion_matrix_eval/confusion_matrix_runner.py`
+   - Results recorded in `confusion_matrix_results.json` and rendered in `confusion_matrix.png` (TP=8, TN=9, FP=0, FN=0).
+
+> **Important Scope & Limitations of Standalone Features:**
+> - **Documentation Audit (`app/audit.py`):** Uses deterministic standard-library AST extraction and heuristic lexical text analysis. Detecting that a parameter name or exception type is mentioned in Markdown does **not** prove semantic correctness, dynamic execution accuracy, or runtime behavior.
+> - **Static Optimization (`app/optimization.py`):** Findings (`OPT001`–`OPT004`) are heuristic suggestions based purely on syntax trees. They do not evaluate runtime type profiles or memory data flow, and do **not** guarantee wall-clock speedup or performance improvements.
+> - **Preliminary Scope:** The research evaluations in `research/` are preliminary benchmarks restricted to their specific designed test sets. They demonstrate isolated engine behavior on representative patterns, but do not imply universal real-world NLP accuracy or superiority over human review.
+> - **API/Frontend Status:** Both modules operate strictly as standalone analytical engines and are not wired into the REST API endpoints or web workspace.
 
 ### Run Frontend Production Build & Linter
 

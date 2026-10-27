@@ -8,6 +8,8 @@ import type {
   ExamplesResponse,
   DocumentRequest,
   DocumentResponse,
+  OptimizeRequest,
+  OptimizeResponse,
   ApiError,
 } from './types';
 
@@ -44,6 +46,13 @@ export async function fetchExamples(): Promise<ExamplesResponse> {
 
 export async function generateDocument(payload: DocumentRequest): Promise<DocumentResponse> {
   return request<DocumentResponse>('/api/document', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function analyzeOptimizations(payload: OptimizeRequest): Promise<OptimizeResponse> {
+  return request<OptimizeResponse>('/api/optimize', {
     method: 'POST',
     body: JSON.stringify(payload),
   });

@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 1rem);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+  padding-bottom: var(--space-xs, 0.5rem);
+  border-bottom: 1px solid var(--border-subtle, rgba(18, 18, 16, 0.08));
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-body, #57534F);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill, 999px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(220, 38, 38, 0.1);
+  color: #c52222;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+
+.badgeSuccess {
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-muted, #78716C);
+  margin: 0;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.errorBanner {
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-card, 12px);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.cleanState {
+  background: rgba(22, 163, 74, 0.06);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: var(--radius-card, 12px);
+  padding: 1rem;
+  color: var(--text-body, #57534F);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.findingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.findingCard {
+  background: var(--surface-light-2, #FAF9F5);
+  border: 1px solid var(--border-subtle, rgba(18, 18, 16, 0.08));
+  border-left: 4px solid var(--color-coral-dark, #D47478);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.findingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ruleTag {
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  background: rgba(212, 116, 120, 0.15);
+  color: #b84b50;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+
+.findingTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-heading, #121210);
+  margin-right: auto;
+}
+
+.location {
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--text-muted, #78716C);
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--text-body, #57534F);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.suggestionBox {
+  margin-top: 4px;
+  background: rgba(239, 151, 147, 0.08);
+  border: 1px solid rgba(212, 116, 120, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.825rem;
+  color: #2e2c29;
+  line-height: 1.45;
+}
+
+.suggestionLabel {
+  font-weight: 700;
+  color: var(--text-heading, #121210);
+  margin-right: 6px;
+}

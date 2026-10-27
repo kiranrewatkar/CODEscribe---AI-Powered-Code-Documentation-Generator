@@ -2,6 +2,177 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.importBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-light-2);
+  color: var(--color-ink);
+  border: 1px solid rgba(18, 18, 16, 0.16);
+  cursor: pointer;
+  transition: all var(--motion-fast, 180ms) ease;
+}
+.importBtn:hover {
+  background: var(--color-white);
+  border-color: rgba(18, 18, 16, 0.35);
+  box-shadow: 0 2px 8px rgba(18, 18, 16, 0.08);
+  transform: translateY(-1px);
+}
+.importBtn:active {
+  transform: translateY(0);
+}
+.importBtn:focus-visible {
+  outline: 2px solid var(--color-coral, #E68D91);
+  outline-offset: 2px;
+}
+
+.hiddenFileInput {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   Luminous Glassmorphism Action Buttons
+   ------------------------------------------------------------ */
+.btnGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optimizeBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 1px solid rgba(212, 116, 120, 0.35);
+  background: linear-gradient(135deg, rgba(255, 254, 252, 0.95) 0%, rgba(241, 213, 209, 0.35) 100%);
+  color: var(--color-coral-dark, #D47478);
+  box-shadow:
+    0 2px 6px rgba(212, 116, 120, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all var(--motion-fast, 180ms) cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.optimizeBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(241, 213, 209, 0.6) 100%);
+  border-color: var(--color-coral, #E68D91);
+  color: #B84B50;
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 4px 14px rgba(212, 116, 120, 0.22),
+    0 0 16px rgba(230, 141, 145, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.optimizeBtn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(212, 116, 120, 0.15);
+}
+
+.optimizeBtn:focus-visible {
+  outline: 2px solid var(--color-coral, #E68D91);
+  outline-offset: 2px;
+}
+
+.optimizeBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.generateBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 7px 18px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, #1f1d1f 0%, #121210 50%, #2a2225 100%);
+  color: #FFFEFC;
+  box-shadow:
+    0 2px 8px rgba(18, 18, 16, 0.25),
+    0 1px 2px rgba(230, 141, 145, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all var(--motion-fast, 180ms) cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.generateBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(239, 151, 147, 0.35), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--motion-fast, 180ms) ease;
+  pointer-events: none;
+}
+
+.generateBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #262426 0%, #161514 50%, #34282b 100%);
+  border-color: rgba(239, 151, 147, 0.45);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 6px 20px rgba(18, 18, 16, 0.35),
+    0 0 20px rgba(230, 141, 145, 0.32),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.generateBtn:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.generateBtn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(18, 18, 16, 0.3);
+}
+
+.generateBtn:focus-visible {
+  outline: 2px solid var(--color-coral, #E68D91);
+  outline-offset: 2px;
+}
+
+.generateBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .importBtn,
+  .optimizeBtn,
+  .generateBtn {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 .exampleSelect {
@@ -75,6 +246,7 @@
 .settingCheckbox input { accent-color: var(--color-ink); cursor: pointer; }
 
 .editorWrap {
+  position: relative;
   display: flex;
   min-height: 300px;
   max-height: 500px;
@@ -86,6 +258,89 @@
   font-size: 0.875rem;
   line-height: 1.7;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.editorWrapDragging {
+  border-color: var(--color-coral, #E68D91);
+  box-shadow: 0 0 0 3px rgba(230, 141, 145, 0.35);
+}
+
+.dragOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(23, 21, 24, 0.88);
+  backdrop-filter: blur(2px);
+  color: var(--color-white, #FFFEFC);
+  z-index: 10;
+  pointer-events: none;
+  border: 2px dashed var(--color-coral, #E68D91);
+  border-radius: calc(var(--radius-md) - 2px);
+  margin: 4px;
+}
+
+.dragOverlayIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.dragOverlayText {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.dragOverlaySubtext {
+  font-size: 0.75rem;
+  color: #A8A29E;
+}
+
+.statusToast {
+  margin-top: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 6px);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.4;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.statusToastError {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #e53e3e;
+}
+
+.statusToastSuccess {
+  background: rgba(22, 163, 74, 0.12);
+  border: 1px solid rgba(22, 163, 74, 0.3);
+  color: #16a34a;
+}
+
+.statusToastDismiss {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0 2px;
+  opacity: 0.8;
+}
+.statusToastDismiss:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .editorWrap:focus-within {

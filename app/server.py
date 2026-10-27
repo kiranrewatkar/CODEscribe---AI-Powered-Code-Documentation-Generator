@@ -41,6 +41,7 @@ from app.generator import (
     CodeSyntaxError,
     ModelNotLoadedError,
 )
+from app.optimization import analyze_optimizations
 
 logging.basicConfig(
     level=logging.INFO,
@@ -179,6 +180,32 @@ class DocumentResponse(BaseModel):
     error_message: Optional[str] = None
 
 
+class OptimizeRequest(BaseModel):
+    code: str = Field(
+        ...,
+        max_length=MAX_SOURCE_CODE_CHARS,
+        description="Python source code to inspect for optimization patterns.",
+    )
+
+
+class OptimizationFindingResponse(BaseModel):
+    rule_id: str
+    title: str
+    description: str
+    suggestion: str
+    line_number: int
+    column_offset: int
+    function_scope: Optional[str] = None
+
+
+class OptimizeResponse(BaseModel):
+    success: bool
+    findings: List[OptimizationFindingResponse]
+    error_message: Optional[str] = None
+    disclaimer: str
+    total_findings: int
+
+
 class HealthResponse(BaseModel):
     status: str
     model_loaded: bool
@@ -302,6 +329,49 @@ async def list_examples() -> ExamplesResponse:
         ),
     ]
     return ExamplesResponse(examples=examples)
+
+
+@app.post("/api/optimize", response_model=OptimizeResponse)
+async def optimize_code(payload: OptimizeRequest) -> OptimizeResponse:
+    """
+    Statically inspect Python source code for heuristic optimization opportunities.
+    Does not execute, import, or evaluate user code.
+    """
+    code_str = payload.code.strip()
+    if not code_str:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Source code cannot be empty or contain only whitespace.",
+        )
+
+    logger.info("Received optimization request: %d characters", len(code_str))
+
+    try:
+        result = analyze_optimizations(payload.code)
+        return OptimizeResponse(
+            success=result.success,
+            findings=[
+                OptimizationFindingResponse(
+                    rule_id=f.rule_id,
+                    title=f.title,
+                    description=f.description,
+                    suggestion=f.suggestion,
+                    line_number=f.line_number,
+                    column_offset=f.column_offset,
+                    function_scope=f.function_scope,
+                )
+                for f in result.findings
+            ],
+            error_message=result.error_message,
+            disclaimer=result.disclaimer,
+            total_findings=result.total_findings,
+        )
+    except Exception as e:
+        logger.error("Internal optimization analysis error: %s", e, exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An error occurred while analyzing optimizations.",
+        ) from e
 
 
 @app.post("/api/document", response_model=DocumentResponse)

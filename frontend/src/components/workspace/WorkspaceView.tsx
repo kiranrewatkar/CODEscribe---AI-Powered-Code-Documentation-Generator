@@ -4,9 +4,11 @@ import { CodeEditor } from './CodeEditor';
 import { DocViewer } from './DocViewer';
 import { MermaidCard } from './MermaidCard';
 import { ExamplesPanel } from './ExamplesPanel';
+import { OptimizationPanel } from './OptimizationPanel';
 import { StatusBadge } from '../common/StatusBadge';
 import { PillNavbar } from '../navigation/PillNavbar';
 import { useDocumentAPI } from '../../hooks/useDocumentAPI';
+import { useOptimizeAPI } from '../../hooks/useOptimizeAPI';
 import { useHealth } from '../../hooks/useHealth';
 import { fetchExamples } from '../../api/client';
 import type { ExampleSnippet } from '../../api/types';
@@ -38,6 +40,7 @@ export function WorkspaceView({ initialView = 'editor', onBack }: WorkspaceViewP
 
   const { health, loading: healthLoading, error: healthError } = useHealth();
   const { generate, data: result, loading: generating, error: genError, reset } = useDocumentAPI();
+  const { analyze: runOptimize, data: optimizeResult, loading: optimizing, error: optimizeError, reset: resetOptimize } = useOptimizeAPI();
 
   // Load examples on mount
   useEffect(() => {
@@ -59,11 +62,17 @@ export function WorkspaceView({ initialView = 'editor', onBack }: WorkspaceViewP
     });
   }, [code, numBeams, maxNewTokens, includeMermaid, generate]);
 
+  const handleOptimize = useCallback(async () => {
+    if (!code.trim()) return;
+    await runOptimize(code);
+  }, [code, runOptimize]);
+
   const handleLoadExample = useCallback((exCode: string) => {
     setCode(exCode);
     setActiveView('editor');
     reset();
-  }, [reset]);
+    resetOptimize();
+  }, [reset, resetOptimize]);
 
   const handleSettingsChange = useCallback((s: Partial<{
     numBeams: number; maxNewTokens: number; includeMermaid: boolean
@@ -135,11 +144,24 @@ export function WorkspaceView({ initialView = 'editor', onBack }: WorkspaceViewP
                   maxNewTokens={maxNewTokens}
                   includeMermaid={includeMermaid}
                   onSettingsChange={handleSettingsChange}
+                  onOptimize={handleOptimize}
+                  optimizing={optimizing}
                 />
               </div>
 
               {/* Right: output */}
               <div className={styles.outputCol}>
+                {(optimizeResult || optimizing || optimizeError) && (
+                  <div style={{ marginBottom: '1.25rem' }}>
+                    <OptimizationPanel
+                      result={optimizeResult}
+                      loading={optimizing}
+                      error={optimizeError}
+                      onClose={resetOptimize}
+                    />
+                  </div>
+                )}
+
                 <DocViewer
                   result={result}
                   loading={generating}

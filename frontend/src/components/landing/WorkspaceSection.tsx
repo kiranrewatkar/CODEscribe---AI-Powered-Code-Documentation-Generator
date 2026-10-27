@@ -3,8 +3,10 @@ import { CodeEditor } from '../workspace/CodeEditor';
 import { DocViewer } from '../workspace/DocViewer';
 import { MermaidCard } from '../workspace/MermaidCard';
 import { ExamplesPanel } from '../workspace/ExamplesPanel';
+import { OptimizationPanel } from '../workspace/OptimizationPanel';
 import { StatusBadge } from '../common/StatusBadge';
 import { useDocumentAPI } from '../../hooks/useDocumentAPI';
+import { useOptimizeAPI } from '../../hooks/useOptimizeAPI';
 import { useHealth } from '../../hooks/useHealth';
 import { fetchExamples } from '../../api/client';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
@@ -26,6 +28,7 @@ export function WorkspaceSection() {
 
   const { health, loading: healthLoading, error: healthError } = useHealth();
   const { generate, data: result, loading: generating, error: genError, reset } = useDocumentAPI();
+  const { analyze: runOptimize, data: optimizeResult, loading: optimizing, error: optimizeError, reset: resetOptimize } = useOptimizeAPI();
   const revealRef = useScrollReveal();
 
   // Load examples on mount
@@ -54,13 +57,19 @@ export function WorkspaceSection() {
     });
   }, [code, numBeams, maxNewTokens, includeMermaid, generate]);
 
+  const handleOptimize = useCallback(async () => {
+    if (!code.trim()) return;
+    await runOptimize(code);
+  }, [code, runOptimize]);
+
   const handleLoadExample = useCallback(
     (exCode: string) => {
       setCode(exCode);
       setMode('editor');
       reset();
+      resetOptimize();
     },
-    [reset]
+    [reset, resetOptimize]
   );
 
   const handleSettingsChange = useCallback(
@@ -156,11 +165,24 @@ export function WorkspaceSection() {
                 maxNewTokens={maxNewTokens}
                 includeMermaid={includeMermaid}
                 onSettingsChange={handleSettingsChange}
+                onOptimize={handleOptimize}
+                optimizing={optimizing}
               />
             </div>
 
             {/* Right Column: Generated Documentation & Mermaid Diagram */}
             <div className={styles.outputPane}>
+              {(optimizeResult || optimizing || optimizeError) && (
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <OptimizationPanel
+                    result={optimizeResult}
+                    loading={optimizing}
+                    error={optimizeError}
+                    onClose={resetOptimize}
+                  />
+                </div>
+              )}
+
               <DocViewer
                 result={result}
                 loading={generating}

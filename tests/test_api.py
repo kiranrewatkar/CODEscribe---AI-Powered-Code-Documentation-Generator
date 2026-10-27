@@ -299,6 +299,44 @@ class TestLocalInferenceAPI(unittest.TestCase):
         self.assertIn("graph TD", result.mermaid_code)
         self.assertGreater(result.timing_ms.total_ms, 0)
 
+    def test_optimize_endpoint_success(self):
+        """Verify /api/optimize endpoint returns detected optimization findings."""
+        code = "def process(items=[]):\n    if x in [1, 2, 3]:\n        pass\n"
+        response = self.client.post("/api/optimize", json={"code": code})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertGreaterEqual(data["total_findings"], 2)
+        rules = [f["rule_id"] for f in data["findings"]]
+        self.assertIn("OPT001", rules)
+        self.assertIn("OPT002", rules)
+        self.assertIn("disclaimer", data)
+
+    def test_optimize_endpoint_empty_findings(self):
+        """Verify /api/optimize succeeds with zero findings for clean code."""
+        code = "def clean_func(val: int) -> int:\n    return val + 1\n"
+        response = self.client.post("/api/optimize", json={"code": code})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["success"])
+        self.assertEqual(data["total_findings"], 0)
+        self.assertEqual(len(data["findings"]), 0)
+
+    def test_optimize_endpoint_empty_code_validation(self):
+        """Verify /api/optimize rejects empty and whitespace-only code with HTTP 422."""
+        response = self.client.post("/api/optimize", json={"code": "   \n\t  "})
+        self.assertEqual(response.status_code, 422)
+
+    def test_optimize_endpoint_syntax_error(self):
+        """Verify /api/optimize returns success=False with syntax error message for broken code."""
+        code = "def broken_syntax(:\n    pass\n"
+        response = self.client.post("/api/optimize", json={"code": code})
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertFalse(data["success"])
+        self.assertIn("Syntax error", data["error_message"])
+        self.assertEqual(data["total_findings"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
