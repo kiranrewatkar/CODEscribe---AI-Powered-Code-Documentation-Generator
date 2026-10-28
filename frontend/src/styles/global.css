@@ -18,19 +18,65 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background: var(--color-cream);
+  background-color: var(--color-cream);
   color: var(--color-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+  min-height: 100%;
+}
+
+/* Subtle, continuously moving ambient gradient backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 75% 55% at 18% 22%, rgba(239, 151, 147, 0.24) 0%, rgba(245, 176, 172, 0.12) 42%, transparent 70%),
+    radial-gradient(ellipse 65% 52% at 82% 78%, rgba(241, 213, 209, 0.36) 0%, rgba(230, 141, 145, 0.14) 46%, transparent 70%),
+    radial-gradient(ellipse 60% 60% at 85% 22%, rgba(230, 141, 145, 0.20) 0%, rgba(241, 213, 209, 0.10) 40%, transparent 65%),
+    radial-gradient(ellipse 72% 56% at 14% 82%, rgba(247, 229, 226, 0.38) 0%, rgba(241, 240, 235, 0.16) 50%, transparent 75%),
+    linear-gradient(135deg, #FAF8F4 0%, #F5F3ED 35%, #F1F0EB 70%, #FAF9F5 100%);
+  will-change: transform;
+  animation: ambient-gradient-drift 28s ease-in-out infinite alternate;
 }
 
 #root {
+  position: relative;
+  z-index: 1;
   min-height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Allow global ambient gradient to show through top-level section containers */
+[class*="pageContainer"],
+[class*="workspace_"],
+[class*="techStrip_"],
+[class*="featureSection_"],
+[class*="processSection_"],
+[class*="workspaceSection_"] {
+  background-color: transparent !important;
+}
+
+@keyframes ambient-gradient-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-2.5%, 2%, 0) scale(1.025) rotate(0.5deg);
+  }
+  100% {
+    transform: translate3d(2%, -2.5%, 0) scale(0.985) rotate(-0.5deg);
+  }
 }
 
 /* Scrollbar styling */
@@ -94,6 +140,10 @@ pre, code {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  body::before {
+    animation: none !important;
+    transform: none !important;
   }
   .reveal-fade-up {
     opacity: 1 !important;
